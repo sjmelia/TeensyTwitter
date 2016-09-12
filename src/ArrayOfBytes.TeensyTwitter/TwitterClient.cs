@@ -46,7 +46,8 @@
             {
                 { "status", status }
             };
-            await this.PostParams("https://api.twitter.com/1.1/statuses/update.json", values);
+            await this.PostParams("https://api.twitter.com/1.1/statuses/update.json", values)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -59,11 +60,12 @@
         {
             var values = new Dictionary<string, string>()
             {
-                { "screenName", screenName },
+                { "screen_name", screenName },
                 { "text", text }
             };
 
-            await this.PostParams("https://api.twitter.com/1.1/direct_messages/new.json", values);
+            await this.PostParams("https://api.twitter.com/1.1/direct_messages/new.json", values)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -72,7 +74,8 @@
         /// <returns>Tweets from the user's timeline.</returns>
         public async Task<IEnumerable<Tweet>> UserTimelineStatuses()
         {
-            return await this.GetTweets("https://api.twitter.com/1.1/statuses/user_timeline.json");
+            return await this.GetTweets("https://api.twitter.com/1.1/statuses/user_timeline.json")
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -81,25 +84,34 @@
         /// <returns>Tweets from the user's home timeline.</returns>
         public async Task<IEnumerable<Tweet>> HomeTimelineStatuses()
         {
-            return await this.GetTweets("https://api.twitter.com/1.1/statuses/home_timeline.json");
+            return await this.GetTweets("https://api.twitter.com/1.1/statuses/home_timeline.json")
+                .ConfigureAwait(false);
         }
 
         private async Task<IEnumerable<Tweet>> GetTweets(string url)
         {
-            using (var response = await this.client.GetAsync(url))
-            using (var stream = await response.Content.ReadAsStreamAsync())
+            using (var response = await this.client.GetAsync(url).ConfigureAwait(false))
             {
-                return this.serializer.ReadObject(stream) as IEnumerable<Tweet>;
+                if (!response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    throw new TwitterClientException(response.StatusCode, body);
+                }
+
+                using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+                {
+                    return this.serializer.ReadObject(stream) as IEnumerable<Tweet>;
+                }
             }
         }
 
         private async Task PostParams(string url, Dictionary<string, string> values)
         {
-            using (var response = await this.client.PostAsync(url, new FormUrlEncodedContent(values)))
+            using (var response = await this.client.PostAsync(url, new FormUrlEncodedContent(values)).ConfigureAwait(false))
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    var body = await response.Content.ReadAsStringAsync();
+                    var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     throw new TwitterClientException(response.StatusCode, body);
                 }
             }

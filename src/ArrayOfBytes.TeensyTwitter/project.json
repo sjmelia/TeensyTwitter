@@ -1,9 +1,10 @@
 {
   "title": "TeensyTwitter",
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "authors": [ "Steve Melia" ],
-  "description": "Minimal dotnetcore client library for the Twitter API, based on TinyTwitter",
+  "description": "Minimal dotnetcore client library for the Twitter API, inspired by TinyTwitter but updated for dotnetcore/async",
   "packOptions": {
+    "projectUrl": "https://github.com/sjmelia/teensytwitter",
     "repository": { "url": "https://github.com/sjmelia/teensytwitter" },
     "licenseUrl": "https://opensource.org/licenses/MIT",
     "requireLicenseAcceptance": true,
@@ -22,7 +23,10 @@
     "NETStandard.Library": "1.6.0",
     "System.Runtime.Serialization.Json": "4.0.2",
     "System.Runtime.Serialization.Primitives": "4.1.1",
-    "ArrayOfBytes.OAuth.Client": "1.0.1"
+    "ArrayOfBytes.OAuth.Client": {
+      "target": "package",
+      "version": "1.0.2"
+    }
   },
   "frameworks": {
     "netstandard1.6": {

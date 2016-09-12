@@ -1,5 +1,5 @@
 {
-  "projects": [ "src", "test", "../ArrayOfBytes.OAuth.Signing/src", "../ArrayOfBytes.OAuth.Client/src" ],
+  "projects": [ "src", "test"],
   "sdk": {
     "version": "1.0.0-preview2-003121"
   }

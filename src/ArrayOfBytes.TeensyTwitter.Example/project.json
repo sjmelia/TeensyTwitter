@@ -5,7 +5,7 @@
   },
 
   "dependencies": {
-    "ArrayOfBytes.TeensyTwitter": "1.0.0-*",
+    "ArrayOfBytes.TeensyTwitter": "1.0.1-*",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0"
