@@ -1,10 +1,29 @@
-﻿{
+{
+  "title": "TeensyTwitter",
   "version": "1.0.0-*",
-
-  "dependencies": {
-    "NETStandard.Library": "1.6.0"
+  "authors": [ "Steve Melia" ],
+  "description": "Minimal dotnetcore client library for the Twitter API, based on TinyTwitter",
+  "packOptions": {
+    "repository": { "url": "https://github.com/sjmelia/teensytwitter" },
+    "licenseUrl": "https://opensource.org/licenses/MIT",
+    "requireLicenseAcceptance": true,
+    "owners": [ "Steve Melia" ],
+    "tags": [ "dotnetcore", "twitter", "api" ]
   },
-
+  "buildOptions": {
+    "xmlDoc": true,
+    "additionalArguments": [ "/ruleset:../../StyleCop.ruleset" ]
+  },
+  "dependencies": {
+    "StyleCop.Analyzers": {
+      "version": "1.0.0",
+      "type": "build"
+    },
+    "NETStandard.Library": "1.6.0",
+    "System.Runtime.Serialization.Json": "4.0.2",
+    "System.Runtime.Serialization.Primitives": "4.1.1",
+    "ArrayOfBytes.OAuth.Client": "1.0.1"
+  },
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"

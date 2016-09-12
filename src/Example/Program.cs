@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ArrayOfBytes.TeensyTwitter
+namespace Example
 {
-    public class Class1
+    public class Program
     {
-        public Class1()
+        public static void Main(string[] args)
         {
         }
     }
